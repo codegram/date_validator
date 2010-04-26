@@ -12,6 +12,7 @@ require 'spec/autorun'
 class TestRecord
   include ActiveModel::Validations
   attr_accessor :expiration_date
+
   def initialize(expiration_date)
     @expiration_date = expiration_date
   end
