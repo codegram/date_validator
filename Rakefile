@@ -5,11 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "date_validator"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "josep.m.bach@gmail.com"
+    gem.summary = "A simple date validator for Rails 3."
+    gem.description = "A simple date validator for Rails 3. Currently supporting :after, :before, :after_or_equal_to and :before_or_equal_to options. Remarkable-friendly :)"
+    gem.email = "info@codegram.com"
     gem.homepage = "http://github.com/codegram/date_validator"
-    gem.authors = ["Josep Mª Bach"]
+    gem.authors = ["Oriol Gual", "Josep Jaume Rey", "Josep Mª Bach"]
     gem.add_development_dependency "rspec"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
