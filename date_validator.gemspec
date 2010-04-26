@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "date_validator.gemspec",
      "lib/date_validator.rb",
      "spec/date_validator_spec.rb",
      "spec/spec_helper.rb"
