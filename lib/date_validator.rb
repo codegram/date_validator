@@ -11,8 +11,8 @@ module ActiveModel
       def check_validity!
         keys = CHECKS.keys
         options.slice(*keys).each do |option, value|
-          next if value.is_a?(Time) || value.is_a?(Proc) || value.is_a?(Symbol)
-          raise ArgumentError, ":#{option} must be a date, a symbol or a proc"
+          next if value.is_a?(Time) || value.is_a?(Proc) || value.is_a?(Symbol) || (defined?(Date) and value.is_a?(Date))
+          raise ArgumentError, ":#{option} must be a time, a date, a symbol or a proc"
         end
       end
 

@@ -9,7 +9,7 @@ begin
     gem.description = "A simple date validator for Rails 3. Currently supporting :after, :before, :after_or_equal_to and :before_or_equal_to options. Remarkable-friendly :)"
     gem.email = "info@codegram.com"
     gem.homepage = "http://github.com/codegram/date_validator"
-    gem.authors = ["Codegram"]
+    gem.authors = ["Oriol Gual", "Josep Mª Bach", "Josep Jaume Rey"]
 
     gem.add_dependency 'activemodel', '>= 3.0.0.beta3'
 
