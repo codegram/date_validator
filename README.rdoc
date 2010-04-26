@@ -1,14 +1,15 @@
 = date_validator
 
-A simple date validator for Rails 3. And I mean simple:
+A simple date validator for Rails 3.
 
-  gem install codegram-date_validator
-  
-In your model:
+  gem sources -a http://gemcutter.org/
+  gem install date_validator
 
-  validates_date_of :expiration_date, :after => Time.now, :before => Time.now + 1.year
+And I mean simple. In your model:
 
-For now these the available options you can use:
+  validates :expiration_date, :date => { :after => Time.now, :before => Time.now + 1.year }
+
+For now these are the available options you can use:
 
   :after
   :before
@@ -17,7 +18,7 @@ For now these the available options you can use:
 
 Pretty much self-explanatory! :) And if you like remarkable, just install this gem as well:
 
-  gem install codegram-remarkable_date_validator
+  gem install remarkable_date_validator
 
 == Note on Patches/Pull Requests
  

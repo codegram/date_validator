@@ -9,8 +9,12 @@ begin
     gem.description = "A simple date validator for Rails 3. Currently supporting :after, :before, :after_or_equal_to and :before_or_equal_to options. Remarkable-friendly :)"
     gem.email = "info@codegram.com"
     gem.homepage = "http://github.com/codegram/date_validator"
-    gem.authors = ["Oriol Gual", "Josep Jaume Rey", "Josep Mª Bach"]
+    gem.authors = ["Codegram"]
+
+    gem.add_dependency 'activemodel', '>= 3.0.0.beta3'
+
     gem.add_development_dependency "rspec"
+
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
