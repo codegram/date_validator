@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{date_validator}
-  s.version = "0.2.4"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oriol Gual", "Josep M\302\252 Bach", "Josep Jaume Rey"]
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "date_validator.gemspec",
-     "init.rb",
      "lib/date_validator.rb",
      "locales/en.yml",
      "spec/date_validator_spec.rb",
