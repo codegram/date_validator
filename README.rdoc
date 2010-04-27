@@ -20,6 +20,8 @@ Pretty much self-explanatory! :) And if you like remarkable, just install this g
 
   gem install remarkable_date_validator
 
+  (source on http://github.com/codegram/remarkable_date_validator/)
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
