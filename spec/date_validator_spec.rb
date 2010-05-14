@@ -53,8 +53,18 @@ describe "DateValidator" do
           end
         # when :date then
         #   TestRecord.validates :expiration_date, :date => {:after => Time.now.to_date}
-      end 
+      end
     end
   end
 
+  it "should gracefully handle an unexpected result from a proc argument evaluation" do
+    TestRecord.validates :expiration_date, :date => {:after => Proc.new{ nil }}
+    TestRecord.new(Time.now).valid?.should be_false
+  end
+
+  it "should gracefully handle an unexpected result from a symbol argument evaluation" do
+    TestRecord.send(:define_method, :min_date, lambda { nil })
+    TestRecord.validates :expiration_date, :date => {:after => :min_date}
+    TestRecord.new(Time.now).valid?.should be_false
+  end
 end

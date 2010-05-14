@@ -11,7 +11,7 @@ module ActiveModel
       def check_validity!
         keys = CHECKS.keys
         options.slice(*keys).each do |option, value|
-          next if value.is_a?(Time) || value.is_a?(Proc) || value.is_a?(Symbol) || (defined?(Date) and value.is_a?(Date))
+          next if is_time?(value) || value.is_a?(Proc) || value.is_a?(Symbol)
           raise ArgumentError, ":#{option} must be a time, a date, a symbol or a proc"
         end
       end
@@ -29,10 +29,14 @@ module ActiveModel
           option_value = option_value.call(record) if option_value.is_a?(Proc)
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
 
-          unless value.send(CHECKS[option], option_value)
+          unless is_time?(option_value) && value.send(CHECKS[option], option_value)
             record.errors.add(attr_name, option, :default => options[:message], :value => value, :date => option_value)
           end
-        end      
+        end
+      end
+
+      def is_time?(object)
+        object.is_a?(Time) || (defined?(Date) and object.is_a?(Date))
       end
 
       module ClassMethods
