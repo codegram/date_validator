@@ -30,7 +30,7 @@ module ActiveModel
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
           
           if option_value.is_a? ActiveSupport::TimeWithZone
-            option_value = option_value.to_time
+            option_value = option_value.to_datetime
           end
           
           unless is_time?(option_value) && value.send(CHECKS[option], option_value)
