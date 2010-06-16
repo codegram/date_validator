@@ -5,9 +5,8 @@ require 'rubygems'
 require 'active_model'
 
 require 'lib/date_validator'
-require 'spec'
-require 'spec/autorun'
-
+require 'rspec'
+require 'rspec/autorun'
 
 class TestRecord
   include ActiveModel::Validations
@@ -16,8 +15,4 @@ class TestRecord
   def initialize(expiration_date)
     @expiration_date = expiration_date
   end
-end
-
-Spec::Runner.configure do |config|
-  
 end
