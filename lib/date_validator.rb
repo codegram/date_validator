@@ -31,7 +31,7 @@ module ActiveModel
           
           option_value = option_value.to_datetime if (defined?(ActiveSupport::TimeWithZone) and option_value.is_a? ActiveSupport::TimeWithZone)
           
-          unless is_time?(option_value) && value.send(CHECKS[option], option_value)
+          unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
             record.errors.add(attr_name, option, :default => options[:message], :value => value, :date => option_value)
           end
         end
