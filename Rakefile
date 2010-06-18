@@ -42,6 +42,7 @@ Rake::RDocTask.new do |rdoc|
   else
     version = ""
   end
+
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "date_validator #{version}"
   rdoc.rdoc_files.include('README*')
