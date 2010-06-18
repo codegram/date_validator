@@ -1,3 +1,5 @@
+require 'active_model'
+
 module ActiveModel
   module Validations
     class DateValidator < ActiveModel::EachValidator
