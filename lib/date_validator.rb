@@ -30,7 +30,10 @@ module ActiveModel
         options.slice(*CHECKS.keys).each do |option, option_value|
           option_value = option_value.call(record) if option_value.is_a?(Proc)
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
-        
+       
+          original_value = value
+          original_option_value = option_value
+
           # To enable to_i conversion, these types must be converted to Datetimes
           if defined?(ActiveSupport::TimeWithZone)
             option_value = option_value.to_datetime if option_value.is_a?(ActiveSupport::TimeWithZone) 
@@ -41,9 +44,10 @@ module ActiveModel
             option_value = option_value.to_datetime if option_value.is_a?(Date) 
             value = value.to_datetime if value.is_a?(Date)  
           end
+         
           
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, option, :default => options[:message], :value => value, :date => option_value)
+            record.errors.add(attr_name, option, :default => options[:message], :value => original_value, :date => original_option_value)
           end
         end
       end
