@@ -47,7 +47,7 @@ module ActiveModel
          
           
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, option, :default => options[:message], :value => original_value, :date => original_option_value)
+            record.errors.add(attr_name, I18n.t("errors.messages.#{option}", :value => original_option_value), :default => options[:message], :value => original_value, :date => original_option_value)
           end
         end
       end

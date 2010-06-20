@@ -5,7 +5,7 @@ en:
   errors:
     messages:
       not_a_date: "is not a date"
-      after: "must be after {{value}}"
-      after_or_equal_to: "must be after or equal to {{value}}"
-      before: "must be before {{value}}"
-      before_or_equal_to: "must be before or equal to {{value}}"
+      after: "must be after %{value}"
+      after_or_equal_to: "must be after or equal to %{value}"
+      before: "must be before %{value}"
+      before_or_equal_to: "must be before or equal to %{value}"

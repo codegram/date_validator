@@ -16,25 +16,44 @@ describe "DateValidator" do
     end
   end
 
-  [:after, :before, :after_or_equal_to, :before_or_equal_to].each do |check|
-    [:valid,:invalid].each do |should_be|
+  [:valid,:invalid].each do |should_be|
 
-      now = Time.now.to_datetime
+    _context = should_be == :valid ? 'when value validates correctly' : 'when value does not match validation requirements'
 
-      model_date = case check
-        when :after then should_be == :valid ? now + 21000 : now - 1
-        when :before then should_be == :valid ? now - 21000 : now + 1
-        when :after_or_equal_to then should_be == :valid ? now : now - 21000
-        when :before_or_equal_to then should_be == :valid ? now : now + 21000
-      end
+    context _context do
 
-      it "should ensure that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
-        TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
-        model = TestRecord.new(model_date)
-        should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check") : model.should(be_invalid, "an attribute should be invalid when offending the #{check} check")
+      [:after, :before, :after_or_equal_to, :before_or_equal_to].each do |check|
+
+          now = Time.now.to_datetime
+
+          model_date = case check
+            when :after then should_be == :valid ? now + 21000 : now - 1
+            when :before then should_be == :valid ? now - 21000 : now + 1
+            when :after_or_equal_to then should_be == :valid ? now : now - 21000
+            when :before_or_equal_to then should_be == :valid ? now : now + 21000
+          end
+
+          it "should ensure that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
+            TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
+            model = TestRecord.new(model_date)
+            should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check") : model.should_not(be_valid, "an attribute should be invalidwhen offending the #{check} check")
+          end
+
+          if _context == 'when value does not match validation requirements'
+
+            it "should yield an error message indicating that value must be #{check} validation requirements" do
+              TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
+              model = TestRecord.new(model_date)
+              model.should_not be_valid
+              model.errors[:expiration_date].should == ["must be " + check.to_s.gsub('_',' ') + " #{Time.now}"]
+            end
+
+          end
+
       end
 
     end
+
   end
 
   extra_types = [:proc, :symbol]
