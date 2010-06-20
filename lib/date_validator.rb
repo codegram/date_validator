@@ -23,10 +23,10 @@ module ActiveModel
         return if options[:allow_nil] && value.nil?
 
         unless value
-          record.errors.add(attr_name, :not_a_date, :value => value, :default => options[:message])
+          record.errors.add(attr_name, I18n.t("errors.messages.not_a_date"), :value => value, :default => options[:message])
           return
         end
-
+  
         options.slice(*CHECKS.keys).each do |option, option_value|
           option_value = option_value.call(record) if option_value.is_a?(Proc)
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
@@ -45,9 +45,9 @@ module ActiveModel
             value = value.to_datetime if value.is_a?(Date)  
           end
          
-          
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, I18n.t("errors.messages.#{option}", :value => original_option_value), :default => options[:message], :value => original_value, :date => original_option_value)
+            error_msg = options[:message] || I18n.t("errors.messages.#{option}", :value => original_option_value)
+            record.errors.add(attr_name, error_msg, :default => options[:message], :value => original_value, :date => original_option_value)
           end
         end
       end
