@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{date_validator}
-  s.version = "0.5.3"
+  s.version = "0.5.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oriol Gual", "Josep M\302\252 Bach", "Josep Jaume Rey"]
