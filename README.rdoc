@@ -7,7 +7,7 @@ A simple date validator for Rails 3.
 
 And I mean simple. In your model:
 
-  validates :expiration_date, :date => {:after => lambda { Time.now, } :before => lambda { Time.now + 1.year } }
+  validates :expiration_date, :date => {:after => lambda { Time.now } :before => lambda { Time.now + 1.year } }
   Using lambda prevents production cache issues.
 
 For now these are the available options you can use:
