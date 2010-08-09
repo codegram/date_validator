@@ -17,11 +17,7 @@ For now these are the available options you can use:
   :after_or_equal_to
   :before_or_equal_to
 
-Pretty much self-explanatory! :) And if you like remarkable, just install this gem as well:
-
-  gem install remarkable_date_validator
-
-  (source on http://github.com/codegram/remarkable_date_validator/)
+Pretty much self-explanatory! :) 
 
 == Note on Patches/Pull Requests
  
