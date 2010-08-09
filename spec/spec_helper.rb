@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
 require 'active_model'
 
-require 'lib/date_validator'
+require 'date_validator'
 require 'rspec'
 require 'rspec/autorun'
 
