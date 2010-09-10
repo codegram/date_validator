@@ -2,9 +2,9 @@
 source :gemcutter
 
 group :development do
-  gem "rspec", ">= 2.0.0.beta.19"
-  gem "activesupport", "3.0.0.rc"
+  gem "rspec", ">= 2.0.0.beta.20"
+  gem "activesupport", "3.0.0"
   gem "tzinfo"
 end
 
-gem "activemodel", "3.0.0.rc"
+gem "activemodel", "3.0.0"

@@ -12,11 +12,11 @@ begin
     gem.homepage = "http://github.com/codegram/date_validator"
     gem.authors = ["Oriol Gual", "Josep M. Bach", "Josep Jaume Rey"]
 
-    gem.add_dependency 'activemodel', '>= 3.0.0.rc'
+    gem.add_dependency 'activemodel', '>= 3.0.0'
 
-    gem.add_development_dependency "rspec", '>= 2.0.0.beta.19'
-    gem.add_development_dependency "activesupport", '>= 3.0.0.rc'
-    gem.add_development_dependency "bundler", '>= 1.0.0.rc3'
+    gem.add_development_dependency "rspec", '>= 2.0.0.beta.20'
+    gem.add_development_dependency "activesupport", '>= 3.0.0'
+    gem.add_development_dependency "bundler", '>= 1.0.0'
     gem.add_development_dependency "tzinfo"
   end
   Jeweler::GemcutterTasks.new
@@ -26,7 +26,7 @@ end
 
 
 # Rake RSpec2 task stuff
-gem 'rspec', '>= 2.0.0.beta.19'
+gem 'rspec', '>= 2.0.0.beta.20'
 gem 'rspec-expectations'
 
 require 'rspec/core/rake_task'
@@ -37,6 +37,12 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 task :default => :spec
+
+desc 'Run the test suite against 1.8.7-p249, 1.9.2-p0 and jruby-1.5.1'
+task :multitest do
+  system('rvm 1.8.7-p249@date_validator, 1.9.2-p0@date_validator, jruby-1.5.1@date_validator rake')
+end
+
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
