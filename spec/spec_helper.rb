@@ -6,7 +6,6 @@ require 'active_model'
 
 require 'date_validator'
 require 'rspec'
-require 'rspec/autorun'
 
 I18n.load_path += Dir[File.join('locales', '*.{rb,yml}')]
 
