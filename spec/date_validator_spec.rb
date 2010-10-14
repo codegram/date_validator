@@ -8,12 +8,19 @@ describe "DateValidator" do
     TestRecord.reset_callbacks(:validate)
   end
 
-  it "should check validity of the arguments" do
+  it "checks validity of the arguments" do
     [3, "foo", 1..6].each do |wrong_argument|
       expect {
         TestRecord.validates :expiration_date, :date => {:before => wrong_argument}
       }.to raise_error(ArgumentError, ":before must be a time, a date, a time_with_zone, a symbol or a proc")
     end
+  end
+
+  it "complains if provided with no options" do
+    TestRecord.validates :expiration_date, :date => {:before => Time.now}
+    model = TestRecord.new(nil)
+    model.should_not be_valid
+    model.errors[:expiration_date].should == ["is not a date"]
   end
 
   [:valid,:invalid].each do |should_be|
@@ -33,7 +40,7 @@ describe "DateValidator" do
             when :before_or_equal_to then should_be == :valid ? now : now + 21000
           end
 
-          it "should ensure that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
+          it "ensures that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
             TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
             model = TestRecord.new(model_date)
             should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check") : model.should_not(be_valid, "an attribute should be invalidwhen offending the #{check} check")
@@ -41,7 +48,7 @@ describe "DateValidator" do
 
           if _context == 'when value does not match validation requirements'
 
-            it "should yield a default error message indicating that value must be #{check} validation requirements" do
+            it "yields a default error message indicating that value must be #{check} validation requirements" do
               TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
               model = TestRecord.new(model_date)
               model.should_not be_valid
@@ -54,7 +61,7 @@ describe "DateValidator" do
 
       if _context == 'when value does not match validation requirements'
 
-        it "should allow for a custom validation message" do
+        it "allows for a custom validation message" do
           TestRecord.validates :expiration_date, :date => {:before_or_equal_to => Time.now, :message => 'must be after Christmas'}
           model = TestRecord.new(Time.now + 21000)
           model.should_not be_valid
@@ -72,7 +79,7 @@ describe "DateValidator" do
   extra_types.push(:time_with_zone) if defined?(ActiveSupport::TimeWithZone)
 
   extra_types.each do |type|
-    it "should accept a #{type} as an argument to a check" do
+    it "accepts a #{type} as an argument to a check" do
       case type
         when :proc then
           expect {
@@ -96,12 +103,12 @@ describe "DateValidator" do
     end
   end
 
-  it "should gracefully handle an unexpected result from a proc argument evaluation" do
+  it "gracefully handles an unexpected result from a proc argument evaluation" do
     TestRecord.validates :expiration_date, :date => {:after => Proc.new{ nil }}
     TestRecord.new(Time.now).should_not be_valid
   end
 
-  it "should gracefully handle an unexpected result from a symbol argument evaluation" do
+  it "gracefully handles an unexpected result from a symbol argument evaluation" do
     TestRecord.send(:define_method, :min_date, lambda { nil })
     TestRecord.validates :expiration_date, :date => {:after => :min_date}
     TestRecord.new(Time.now).should_not be_valid

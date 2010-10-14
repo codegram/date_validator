@@ -1,6 +1,7 @@
 = date_validator
 
-A simple date validator for Rails 3. Compatible with Ruby 1.8, 1.9 and JRuby.
+A simple date validator for Rails 3. Compatible with Ruby 1.8, 1.9, JRuby 1.5.3
+and Rubinius 1.1.
 
   gem sources -a http://gemcutter.org/
   gem install date_validator

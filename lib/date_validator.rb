@@ -56,14 +56,6 @@ module ActiveModel
         object.is_a?(Time) || (defined?(Date) and object.is_a?(Date)) || (defined?(ActiveSupport::TimeWithZone) and object.is_a?(ActiveSupport::TimeWithZone))
       end
 
-      module ClassMethods
-
-        def validates_date_of(*attr_names)
-          validates_with DateValidator, _merge_attributes(attr_names)
-        end
-
-      end
-
     end
   end
 end
