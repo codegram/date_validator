@@ -11,8 +11,6 @@ require 'active_model'
 require 'date_validator'
 require 'rspec'
 
-I18n.load_path += Dir[File.join('locales', '*.{rb,yml}')]
-
 class TestRecord
   include ActiveModel::Validations
   attr_accessor :expiration_date

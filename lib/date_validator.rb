@@ -23,7 +23,7 @@ module ActiveModel
         return if options[:allow_nil] && value.nil?
 
         unless value
-          record.errors.add(attr_name, I18n.t("errors.messages.not_a_date"), :value => value, :default => options[:message])
+          record.errors.add(attr_name, :not_a_date, options)
           return
         end
   
@@ -46,8 +46,7 @@ module ActiveModel
           end
          
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            error_msg = options[:message] || I18n.t("errors.messages.#{option}", :value => original_option_value)
-            record.errors.add(attr_name, error_msg, :default => options[:message], :value => original_value, :date => original_option_value)
+            record.errors.add(attr_name, option, options.merge(:value => original_value, :date => original_option_value))
           end
         end
       end
@@ -59,3 +58,6 @@ module ActiveModel
     end
   end
 end
+
+require 'active_support/i18n'
+I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__), '../locales', '*.yml')).to_s]

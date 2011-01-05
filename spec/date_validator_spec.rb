@@ -68,6 +68,15 @@ describe "DateValidator" do
           model.errors[:expiration_date].should == ["must be after Christmas"]
         end
 
+        it "allows custom validation message to be handled by I18n" do
+          custom_message = 'Custom Date Message'
+          I18n.backend.store_translations('en', {:errors => {:messages => {:not_a_date => custom_message}}})
+          TestRecord.validates :expiration_date, :date => true
+          model = TestRecord.new(nil)
+          model.should_not be_valid
+          model.errors[:expiration_date].should == [custom_message]
+        end
+
       end
 
     end
