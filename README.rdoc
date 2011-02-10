@@ -8,8 +8,8 @@ and Rubinius 1.1.
 
 And I mean simple. In your model:
 
-  validates :expiration_date, :date => {:after => lambda { Time.now } :before => lambda { Time.now + 1.year } }
-  # Using lambda prevents production cache issues
+  validates :expiration_date, :date => {:after => Proc.new { Time.now } :before => Proc.new { Time.now + 1.year } }
+  # Using Proc.new prevents production cache issues
 
 For now these are the available options you can use:
 
