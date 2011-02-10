@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{date_validator}
-  s.version = "0.5.9"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oriol Gual", "Josep M. Bach", "Josep Jaume Rey"]
-  s.date = %q{2010-10-14}
+  s.date = %q{2011-02-10}
   s.description = %q{A simple, ORM agnostic, Ruby 1.9 compatible date validator for Rails 3, based on ActiveModel. Currently supporting :after, :before, :after_or_equal_to and :before_or_equal_to options.}
   s.email = %q{info@codegram.com}
   s.extra_rdoc_files = [
