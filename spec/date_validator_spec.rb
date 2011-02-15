@@ -41,7 +41,7 @@ describe "DateValidator" do
           end
 
           it "ensures that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
-            TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
+            TestRecord.validates :expiration_date, :date => {:"#{check}" => now}
             model = TestRecord.new(model_date)
             should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check") : model.should_not(be_valid, "an attribute should be invalidwhen offending the #{check} check")
           end
@@ -49,10 +49,10 @@ describe "DateValidator" do
           if _context == 'when value does not match validation requirements'
 
             it "yields a default error message indicating that value must be #{check} validation requirements" do
-              TestRecord.validates :expiration_date, :date => {:"#{check}" => Time.now}
+              TestRecord.validates :expiration_date, :date => {:"#{check}" => now}
               model = TestRecord.new(model_date)
               model.should_not be_valid
-              model.errors[:expiration_date].should == ["must be " + check.to_s.gsub('_',' ') + " #{Time.now}"]
+              model.errors[:expiration_date].should == ["must be " + check.to_s.gsub('_',' ') + " #{now}"]
             end
             
           end
