@@ -122,4 +122,63 @@ describe "DateValidator" do
     TestRecord.validates :expiration_date, :date => {:after => :min_date}
     TestRecord.new(Time.now).should_not be_valid
   end
+  
+  it "raises a NoMethodError from the record if the record does not respond to the symbol argument" do
+    TestRecord.validates :expiration_date, :date => {:after => :not_a_method}
+    record = TestRecord.new(Time.now)
+    lambda{ record.valid? }.should raise_error
+    begin
+      record.valid?
+    rescue Exception => e
+      e.should be_a NoMethodError
+      pattern = /undefined method `not_a_method' for (?:#<)?TestRecord/
+      e.to_s.should =~ pattern
+    end
+  end
+  
+  [:after, :before, :after_or_equal_to, :before_or_equal_to].each do |check|
+    [:today, :tomorrow, :yesterday].each do |relative_comparison|
+      
+      if check == :after and relative_comparison == :today
+        should_be_valid = false
+      elsif check == :after and relative_comparison == :tomorrow
+        should_be_valid = false
+      elsif check == :after and relative_comparison == :yesterday
+        should_be_valid = true
+      elsif check == :before and relative_comparison == :today
+        should_be_valid = false
+      elsif check == :before and relative_comparison == :tomorrow
+        should_be_valid = true
+      elsif check == :before and relative_comparison == :yesterday
+        should_be_valid = false
+      elsif check == :after_or_equal_to and relative_comparison == :today
+        should_be_valid = true
+      elsif check == :after_or_equal_to and relative_comparison == :tomorrow
+        should_be_valid = false
+      elsif check == :after_or_equal_to and relative_comparison == :yesterday
+        should_be_valid = true
+      elsif check == :before_or_equal_to and relative_comparison == :today
+        should_be_valid = true
+      elsif check == :before_or_equal_to and relative_comparison == :tomorrow
+        should_be_valid = true
+      elsif check == :before_or_equal_to and relative_comparison == :yesterday
+        should_be_valid = false
+      end
+      
+      it "ensures that a check asserting that Time.now is #{check} #{relative_comparison} #{should_be_valid ? 'passes' : 'fails'} validations" do
+        
+        TestRecord.validates :expiration_date, :date => {check => relative_comparison}
+        record = TestRecord.new(Time.now)
+        
+        if should_be_valid
+          record.should be_valid
+        else
+          record.should_not be_valid
+        end
+        
+      end
+      
+    end
+  end
+
 end

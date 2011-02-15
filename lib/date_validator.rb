@@ -28,11 +28,44 @@ module ActiveModel
         end
   
         options.slice(*CHECKS.keys).each do |option, option_value|
-          option_value = option_value.call(record) if option_value.is_a?(Proc)
-          option_value = record.send(option_value) if option_value.is_a?(Symbol)
+          
+          if option_value.is_a?(Proc)
+            option_value = option_value.call(record)
+            
+          elsif option_value.is_a?(Symbol)
+            
+            begin
+              option_value = record.send(option_value)
+
+            rescue NoMethodError => original_error
+              begin
+                original_option_value = option_value
+                option_value = case option_value
+                when :today
+                  case option
+                  when :after, :before_or_equal_to
+                    Date.today.end_of_day
+                  else
+                    Date.today
+                  end
+                when :tomorrow
+                  Date.tomorrow
+                when :yesterday
+                  Date.yesterday
+                else
+                  raise original_error
+                end
+
+              rescue NoMethodError
+                raise original_error
+              end
+              
+            end
+            
+          end
        
           original_value = value
-          original_option_value = option_value
+          original_option_value ||= option_value
 
           # To enable to_i conversion, these types must be converted to Datetimes
           if defined?(ActiveSupport::TimeWithZone)
