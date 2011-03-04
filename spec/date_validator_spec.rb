@@ -43,7 +43,7 @@ module ActiveModel
 
               it "ensures that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
                 TestRecord.validates :expiration_date,
-                                     :date => {:"#{check}" => Time.now}
+                                     :date => {:"#{check}" => now}
 
                 model = TestRecord.new(model_date)
                 should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check")\
@@ -53,22 +53,24 @@ module ActiveModel
               if _context == 'when value does not match validation requirements'
                 it "yields a default error message indicating that value must be #{check} validation requirements" do
                   TestRecord.validates :expiration_date,
-                                       :date => {:"#{check}" => Time.now}
+                                       :date => {:"#{check}" => now}
 
                   model = TestRecord.new(model_date)
                   model.should_not be_valid
-                  model.errors[:expiration_date].should eq(["must be " + check.to_s.gsub('_',' ') + " #{Time.now}"])
+                  model.errors[:expiration_date].should eq(["must be " + check.to_s.gsub('_',' ') + " #{now}"])
                 end
               end
           end
 
           if _context == 'when value does not match validation requirements'
+            now = Time.now.to_datetime
+
             it "allows for a custom validation message" do
               TestRecord.validates :expiration_date,
-                                   :date => {:before_or_equal_to => Time.now,
+                                   :date => {:before_or_equal_to => now,
                                              :message => 'must be after Christmas'}
 
-              model = TestRecord.new(Time.now + 21000)
+              model = TestRecord.new(now + 21000)
               model.should_not be_valid
               model.errors[:expiration_date].should eq(["must be after Christmas"])
             end
