@@ -1,8 +1,0 @@
-es:
-  errors:
-    messages:
-      not_a_date: "no es una fecha"
-      after: "tiene que ser posterior a %{date}"
-      after_or_equal_to: "tiene que ser posterior o igual a %{date}"
-      before: "tiene que ser antes de %{date}"
-      before_or_equal_to: "tiene que ser antes o igual a %{date}"
