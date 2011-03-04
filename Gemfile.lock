@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    date_validator (0.6.1)
+      activemodel (~> 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -7,15 +13,21 @@ GEM
       i18n (~> 0.4.1)
     activesupport (3.0.0)
     builder (2.1.2)
+    configuration (1.2.0)
     diff-lcs (1.1.2)
-    gemcutter (0.6.1)
-    git (1.2.5)
-    i18n (0.4.1)
-    jeweler (1.4.0)
-      gemcutter (>= 0.1.0)
-      git (>= 1.2.5)
-      rubyforge (>= 2.0.0)
-    json_pure (1.4.6)
+    guard (0.3.0)
+      open_gem (~> 1.4.2)
+      thor (~> 0.14.6)
+    guard-rspec (0.2.0)
+      guard (>= 0.2.2)
+    i18n (0.4.2)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    open_gem (1.4.2)
+      launchy (~> 0.3.5)
+    rake (0.8.7)
+    rb-fsevent (0.3.10)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -24,11 +36,7 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
-    rubyforge (2.0.4)
-      json_pure (>= 1.1.7)
-    simplecov (0.3.6)
-      simplecov-html (>= 0.3.7)
-    simplecov-html (0.3.8)
+    thor (0.14.6)
     tzinfo (0.3.23)
 
 PLATFORMS
@@ -36,9 +44,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel (~> 3.0.0)
   activesupport (~> 3.0.0)
-  jeweler
+  date_validator!
+  guard
+  guard-rspec
+  rb-fsevent
   rspec (~> 2.5.0)
-  simplecov
-  tzinfo
+  tzinfo (~> 0.3.0)
