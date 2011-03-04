@@ -1,15 +1,14 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'simplecov'
 SimpleCov.start do
   add_group "Lib", "lib"
 end
 
-require 'rubygems'
-require 'active_model'
-
-require 'date_validator'
 require 'rspec'
+
+require 'active_support/time' # For testing Date and TimeWithZone objects
+
+require 'active_model'
+require 'date_validator'
 
 class TestRecord
   include ActiveModel::Validations

@@ -1,15 +1,30 @@
 require 'active_model/validations'
 
+# ActiveModel Rails module.
 module ActiveModel
+
+  # ActiveModel::Validations Rails module. Contains all the default validators.
   module Validations
+
+    # Date Validator. Inherits from ActiveModel::EachValidator.
+    #
+    # Responds to the regular validator API methods `#check_validity` and
+    # `#validate_each`.
     class DateValidator < ActiveModel::EachValidator
+
+      # Implemented checks and their associated operators.
       CHECKS = { :after => :>, :after_or_equal_to => :>=,
                 :before => :<, :before_or_equal_to => :<=}.freeze
 
+      # Call `#initialize` on the superclass, adding a default
+      # `:allow_nil => false` option.
       def initialize(options)
         super(options.reverse_merge(:allow_nil => false))
       end
 
+      # Validates the arguments passed to the validator.
+      #
+      # They must be either any kind of <Time>, a <Proc>, or a <Symbol>.
       def check_validity!
         keys = CHECKS.keys
         options.slice(*keys).each do |option, value|
@@ -18,8 +33,9 @@ module ActiveModel
         end
       end
 
+      # The actual validator method. It is called when ActiveRecord iterates
+      # over all the validators.
       def validate_each(record, attr_name, value)
-
         return if options[:allow_nil] && value.nil?
 
         unless value
@@ -51,10 +67,11 @@ module ActiveModel
         end
       end
 
+      private
+
       def is_time?(object)
         object.is_a?(Time) || (defined?(Date) and object.is_a?(Date)) || (defined?(ActiveSupport::TimeWithZone) and object.is_a?(ActiveSupport::TimeWithZone))
       end
-
     end
   end
 end
