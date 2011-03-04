@@ -13,6 +13,13 @@ And I mean simple. In your model:
                         :before => Proc.new { Time.now + 1.year } }
     # Using Proc.new prevents production cache issues
 
+If you want to check the date against another attribute, you can pass it
+a Symbol instead of a block:
+
+    # Ensure the expiration date is after the packaging date
+    validates :expiration_date,
+              :date => {:after => :packaging_date}
+
 For now the available options you can use are `:after`, `:before`,
 `:after_or_equal_to` and `:before_or_equal_to`.
 
