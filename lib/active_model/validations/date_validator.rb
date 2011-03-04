@@ -24,7 +24,7 @@ module ActiveModel
 
       # Validates the arguments passed to the validator.
       #
-      # They must be either any kind of <Time>, a <Proc>, or a <Symbol>.
+      # They must be either any kind of Time, a Proc, or a Symbol.
       def check_validity!
         keys = CHECKS.keys
         options.slice(*keys).each do |option, value|
