@@ -1,0 +1,8 @@
+nl:
+  errors:
+    messages:
+      not_a_date: "is geen datum"
+      after: "moet na %{date} liggen"
+      after_or_equal_to: "moet gelijk zijn aan of na %{date} liggen"
+      before: "moet voor %{date} liggen"
+      before_or_equal_to: "moet gelijk zijn of voor %{date} liggen"
