@@ -62,7 +62,10 @@ module ActiveModel
           end
          
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, option, options.merge(:value => original_value, :date => original_option_value))
+            record.errors.add(attr_name, option, options.merge(
+                :value => original_value,
+                :date  => (I18n.localize(original_option_value) rescue original_option_value)
+            ))
           end
         end
       end
