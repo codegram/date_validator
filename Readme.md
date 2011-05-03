@@ -23,6 +23,12 @@ a Symbol instead of a block:
 For now the available options you can use are `:after`, `:before`,
 `:after_or_equal_to` and `:before_or_equal_to`.
 
+If you want to specify a custom message, you can do so in the options hash:
+
+    validates :start_date,
+      :date => {:after => Date.today, :message => 'must be after today'},
+      :on => :create
+
 Pretty much self-explanatory! :) 
 
 ## Note on Patches/Pull Requests
