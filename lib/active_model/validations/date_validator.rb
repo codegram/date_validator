@@ -76,5 +76,23 @@ module ActiveModel
         object.is_a?(Time) || (defined?(Date) and object.is_a?(Date)) || (defined?(ActiveSupport::TimeWithZone) and object.is_a?(ActiveSupport::TimeWithZone))
       end
     end
+
+    module HelperMethods
+      # Validates whether the value of the specified attribute is a validate Date
+      #
+      #   class Person < ActiveRecord::Base
+      #     validates_date_of :payment_date, :after => :packaging_date
+      #     validates_date_of :expiration_date, :before => Proc.new { Time.now }
+      #   end
+      #
+      # Configuration options:
+      # * <tt>:after</tt> - check that a Date is after the specified one.
+      # * <tt>:before</tt> - check that a Date is before the specified one.
+      # * <tt>:after_or_equal_to</tt> - check that a Date is after or equal to the specified one.
+      # * <tt>:before_or_equal_to</tt> - check that a Date is before or equal to the specified one.
+      def validates_date_of(*attr_names)
+        validates_with DateValidator, _merge_attributes(attr_names)
+      end
+    end
   end
 end
