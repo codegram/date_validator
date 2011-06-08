@@ -1,1 +1,1 @@
-rvm --create use ruby-1.9.2@date_validator
+rvm use ruby-1.9.2@date_validator --create

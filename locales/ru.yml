@@ -1,0 +1,8 @@
+ru:
+  errors:
+    messages:
+      not_a_date: "неверный формат"
+      after: "должна быть позднее чем %{date}"
+      after_or_equal_to: "должна равняться или быть позднее чем %{date}"
+      before: "должна быть ранее чем %{date}"
+      before_or_equal_to: "должна равняться или быть ранее чем %{date}"

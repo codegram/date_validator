@@ -62,7 +62,10 @@ module ActiveModel
           end
          
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, option, options.merge(:value => original_value, :date => original_option_value))
+            record.errors.add(attr_name, option, options.merge(
+                :value => original_value,
+                :date  => (I18n.localize(original_option_value) rescue original_option_value)
+            ))
           end
         end
       end
@@ -71,6 +74,24 @@ module ActiveModel
 
       def is_time?(object)
         object.is_a?(Time) || (defined?(Date) and object.is_a?(Date)) || (defined?(ActiveSupport::TimeWithZone) and object.is_a?(ActiveSupport::TimeWithZone))
+      end
+    end
+
+    module HelperMethods
+      # Validates whether the value of the specified attribute is a validate Date
+      #
+      #   class Person < ActiveRecord::Base
+      #     validates_date_of :payment_date, :after => :packaging_date
+      #     validates_date_of :expiration_date, :before => Proc.new { Time.now }
+      #   end
+      #
+      # Configuration options:
+      # * <tt>:after</tt> - check that a Date is after the specified one.
+      # * <tt>:before</tt> - check that a Date is before the specified one.
+      # * <tt>:after_or_equal_to</tt> - check that a Date is after or equal to the specified one.
+      # * <tt>:before_or_equal_to</tt> - check that a Date is before or equal to the specified one.
+      def validates_date_of(*attr_names)
+        validates_with DateValidator, _merge_attributes(attr_names)
       end
     end
   end
