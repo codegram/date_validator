@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     date_validator (0.6.1)
-      activemodel (~> 3.0.0)
+      activemodel (>= 3.0.0, < 3.2.0)
 
 GEM
   remote: http://rubygems.org/

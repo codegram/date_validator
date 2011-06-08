@@ -27,6 +27,13 @@ module ActiveModel
         model.errors[:expiration_date].should eq(["is not a date"])
       end
 
+      it "works with helper methods" do
+        time = Time.now
+        TestRecord.validates_date_of :expiration_date, :before => time
+        model = TestRecord.new(time + 20000)
+        model.should_not be_valid
+      end
+
       [:valid,:invalid].each do |should_be|
         _context = should_be == :valid ? 'when value validates correctly' : 'when value does not match validation requirements'
 
