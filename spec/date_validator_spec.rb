@@ -57,7 +57,7 @@ module ActiveModel
 
                   model = TestRecord.new(model_date)
                   model.should_not be_valid
-                  model.errors[:expiration_date].should eq(["must be " + check.to_s.gsub('_',' ') + " #{now}"])
+                  model.errors[:expiration_date].should eq(["must be " + check.to_s.gsub('_',' ') + " #{I18n.localize(now)}"])
                 end
               end
           end
