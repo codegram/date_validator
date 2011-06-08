@@ -4,26 +4,26 @@ A simple date validator for Rails 3. Compatible with Ruby 1.8.7, 1.9.2 and
 Rubinius 1.2.2.
 
 ```ruby
-    $ gem sources -a http://gemcutter.org/
-    $ gem install date_validator
+$ gem sources -a http://gemcutter.org/
+$ gem install date_validator
 ```
 
 And I mean simple. In your model:
 
 ```ruby
-    validates :expiration_date,
-              :date => {:after => Proc.new { Time.now },
-                        :before => Proc.new { Time.now + 1.year } }
-    # Using Proc.new prevents production cache issues
+validates :expiration_date,
+          :date => {:after => Proc.new { Time.now },
+                    :before => Proc.new { Time.now + 1.year } }
+# Using Proc.new prevents production cache issues
 ```
 
 If you want to check the date against another attribute, you can pass it
 a Symbol instead of a block:
 
 ```ruby
-    # Ensure the expiration date is after the packaging date
-    validates :expiration_date,
-              :date => {:after => :packaging_date}
+# Ensure the expiration date is after the packaging date
+validates :expiration_date,
+          :date => {:after => :packaging_date}
 ```
 
 For now the available options you can use are `:after`, `:before`,
@@ -32,9 +32,9 @@ For now the available options you can use are `:after`, `:before`,
 If you want to specify a custom message, you can do so in the options hash:
 
 ```ruby
-    validates :start_date,
-      :date => {:after => Date.today, :message => 'must be after today'},
-      :on => :create
+validates :start_date,
+  :date => {:after => Date.today, :message => 'must be after today'},
+  :on => :create
 ```
 
 Pretty much self-explanatory! :) 
