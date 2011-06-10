@@ -3,7 +3,8 @@ SimpleCov.start do
   add_group "Lib", "lib"
 end
 
-require 'rspec'
+require 'minitest/spec'
+require 'minitest/autorun'
 
 require 'active_support/time' # For testing Date and TimeWithZone objects
 

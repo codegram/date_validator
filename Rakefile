@@ -1,9 +1,12 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-require 'rspec/core/rake_task'
-desc "Run superrtext specs"
-RSpec::Core::RakeTask.new
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/**/*_test.rb']
+  t.verbose = true
+end
 
 require 'yard'
 YARD::Rake::YardocTask.new(:docs) do |t|
@@ -39,5 +42,4 @@ end
 
 task :doc => [:docs]
 
-task :default => :spec
-task :test => [:spec]
+task :default => :test

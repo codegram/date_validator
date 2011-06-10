@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'test_helper'
 
 module ActiveModel
   module Validations
@@ -11,10 +11,9 @@ module ActiveModel
 
       it "checks validity of the arguments" do
         [3, "foo", 1..6].each do |wrong_argument|
-          expect {
-            TestRecord.validates :expiration_date, 
-                                 :date => {:before => wrong_argument}
-          }.to raise_error(ArgumentError, ":before must be a time, a date, a time_with_zone, a symbol or a proc")
+          proc { 
+            TestRecord.validates(:expiration_date, :date => {:before => wrong_argument})
+          }.must_raise(ArgumentError, ":before must be a time, a date, a time_with_zone, a symbol or a proc")
         end
       end
 
@@ -23,38 +22,37 @@ module ActiveModel
                              :date => {:before => Time.now}
 
         model = TestRecord.new(nil)
-        model.should_not be_valid
-        model.errors[:expiration_date].should eq(["is not a date"])
+        model.valid?.must_equal false
+        model.errors[:expiration_date].must_equal(["is not a date"])
       end
 
       it "works with helper methods" do
         time = Time.now
         TestRecord.validates_date_of :expiration_date, :before => time
         model = TestRecord.new(time + 20000)
-        model.should_not be_valid
+        model.valid?.must_equal false
       end
 
-      [:valid,:invalid].each do |should_be|
-        _context = should_be == :valid ? 'when value validates correctly' : 'when value does not match validation requirements'
+      [:valid,:invalid].each do |must_be|
+        _context = must_be == :valid ? 'when value validates correctly' : 'when value does not match validation requirements'
 
-        context _context do
+        describe _context do
           [:after, :before, :after_or_equal_to, :before_or_equal_to].each do |check|
               now = Time.now.to_datetime
 
               model_date = case check
-                when :after then should_be == :valid ? now + 21000 : now - 1
-                when :before then should_be == :valid ? now - 21000 : now + 1
-                when :after_or_equal_to then should_be == :valid ? now : now - 21000
-                when :before_or_equal_to then should_be == :valid ? now : now + 21000
+                when :after then must_be == :valid ? now + 21000 : now - 1
+                when :before then must_be == :valid ? now - 21000 : now + 1
+                when :after_or_equal_to then must_be == :valid ? now : now - 21000
+                when :before_or_equal_to then must_be == :valid ? now : now + 21000
               end
 
-              it "ensures that an attribute is #{should_be} when #{should_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
+              it "ensures that an attribute is #{must_be} when #{must_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
                 TestRecord.validates :expiration_date,
                                      :date => {:"#{check}" => now}
 
                 model = TestRecord.new(model_date)
-                should_be == :valid ? model.should(be_valid, "an attribute should be valid when respecting the #{check} check")\
-                                    : model.should_not(be_valid, "an attribute should be invalidwhen offending the #{check} check")
+                must_be == :valid ? model.valid?.must_equal(true) : model.valid?.must_equal(false)
               end
 
               if _context == 'when value does not match validation requirements'
@@ -63,8 +61,8 @@ module ActiveModel
                                        :date => {:"#{check}" => now}
 
                   model = TestRecord.new(model_date)
-                  model.should_not be_valid
-                  model.errors[:expiration_date].should eq(["must be " + check.to_s.gsub('_',' ') + " #{I18n.localize(now)}"])
+                  model.valid?.must_equal false
+                  model.errors[:expiration_date].must_equal(["must be " + check.to_s.gsub('_',' ') + " #{I18n.localize(now)}"])
                 end
               end
           end
@@ -78,8 +76,8 @@ module ActiveModel
                                              :message => 'must be after Christmas'}
 
               model = TestRecord.new(now + 21000)
-              model.should_not be_valid
-              model.errors[:expiration_date].should eq(["must be after Christmas"])
+              model.valid?.must_equal false
+              model.errors[:expiration_date].must_equal(["must be after Christmas"])
             end
 
             it "allows custom validation message to be handled by I18n" do
@@ -89,8 +87,8 @@ module ActiveModel
               TestRecord.validates :expiration_date, :date => true
 
               model = TestRecord.new(nil)
-              model.should_not be_valid
-              model.errors[:expiration_date].should eq([custom_message])
+              model.valid?.must_equal false
+              model.errors[:expiration_date].must_equal([custom_message])
             end
           end
 
@@ -105,24 +103,15 @@ module ActiveModel
         it "accepts a #{type} as an argument to a check" do
           case type
             when :proc then
-              expect {
-                TestRecord.validates :expiration_date,
-                                     :date => {:after => Proc.new{Time.now + 21000}}
-              }.to_not raise_error
+              TestRecord.validates(:expiration_date, :date => {:after => Proc.new{Time.now + 21000}}).must_be_kind_of Hash
             when :symbol then
-              expect {
-                TestRecord.send(:define_method, :min_date, lambda { Time.now + 21000 })
-                TestRecord.validates :expiration_date, :date => {:after => :min_date}
-              }.to_not raise_error
+              TestRecord.send(:define_method, :min_date, lambda { Time.now + 21000 })
+              TestRecord.validates(:expiration_date, :date => {:after => :min_date}).must_be_kind_of Hash
             when :date then
-              expect {
-                TestRecord.validates :expiration_date, :date => {:after => Time.now.to_date}
-              }.to_not raise_error
+              TestRecord.validates(:expiration_date, :date => {:after => Time.now.to_date}).must_be_kind_of Hash
             when :time_with_zone then
-              expect {
-                Time.zone = "Hawaii"
-                TestRecord.validates :expiration_date, :date => {:before => Time.zone.parse((Time.now + 21000).to_s)}
-              }.to_not raise_error
+              Time.zone = "Hawaii"
+              TestRecord.validates(:expiration_date, :date => {:before => Time.zone.parse((Time.now + 21000).to_s)}).must_be_kind_of Hash
           end
         end
       end
@@ -131,7 +120,7 @@ module ActiveModel
         TestRecord.validates :expiration_date,
                              :date => {:after => Proc.new{ nil }}
 
-        TestRecord.new(Time.now).should_not be_valid
+        TestRecord.new(Time.now).valid?.must_equal false
       end
 
       it "gracefully handles an unexpected result from a symbol argument evaluation" do
@@ -139,7 +128,7 @@ module ActiveModel
         TestRecord.validates :expiration_date,
                              :date => {:after => :min_date}
 
-        TestRecord.new(Time.now).should_not be_valid
+        TestRecord.new(Time.now).valid?.must_equal false
       end
     end
 
