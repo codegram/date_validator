@@ -17,13 +17,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activemodel', ['>= 3.0.0', '< 3.2.0']
 
   s.add_development_dependency 'minitest'
-  s.add_development_dependency 'simplecov'
   s.add_development_dependency 'activesupport', ['>= 3.0.0', '< 3.2.0']
-
   s.add_development_dependency 'tzinfo', '~> 0.3.0'
-
-  s.add_development_dependency 'yard'
-  s.add_development_dependency 'bluecloth'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

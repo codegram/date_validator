@@ -1,7 +1,12 @@
-require 'simplecov'
-SimpleCov.start do
-  add_group "Lib", "lib"
+begin
+  require 'simplecov'; 
+  SimpleCov.start do
+    add_group "Lib", 'lib'
+  end
+rescue LoadError
 end
+
+begin; require 'turn'; rescue LoadError; end
 
 require 'minitest/spec'
 require 'minitest/autorun'
