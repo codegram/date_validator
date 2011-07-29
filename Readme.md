@@ -39,6 +39,12 @@ validates :start_date,
 
 Pretty much self-explanatory! :) 
 
+If you want to make sure an attribute is before/after another attribute, use:
+
+```ruby
+validates :start_date, :date => {:before => :end_date }
+```
+
 ## Note on Patches/Pull Requests
  
 * Fork the project.
