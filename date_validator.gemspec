@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activemodel', ['>= 3.0.0', '< 3.2.0']
 
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'activesupport', ['>= 3.0.0', '< 3.2.0']
   s.add_development_dependency 'tzinfo', '~> 0.3.0'
 
