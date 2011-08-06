@@ -11,13 +11,14 @@ module ActiveModel
 
       it "checks validity of the arguments" do
         [3, "foo", 1..6].each do |wrong_argument|
-          proc { 
+          proc {
             TestRecord.validates(:expiration_date, :date => {:before => wrong_argument})
           }.must_raise(ArgumentError, ":before must be a time, a date, a time_with_zone, a symbol or a proc")
         end
       end
 
       it "complains when no options are provided" do
+        I18n.backend.reload!
         TestRecord.validates :expiration_date,
                              :date => {:before => Time.now}
 
