@@ -23,7 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (>= 3.0.0, < 3.2.0)
+  activesupport (< 3.2.0, >= 3.0.0)
   date_validator!
   minitest
   rake
