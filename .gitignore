@@ -6,3 +6,4 @@ pkg
 *.rbc
 doc/*
 .yardoc/*
+.bundle
