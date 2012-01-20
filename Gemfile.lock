@@ -2,19 +2,21 @@ PATH
   remote: .
   specs:
     date_validator (0.6.2)
-      activemodel (>= 3.0.0, < 3.2.0)
+      activemodel (>= 3.0.0, < 4.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.0.0)
-      activesupport (= 3.0.0)
-      builder (~> 2.1.2)
-      i18n (~> 0.4.1)
-    activesupport (3.0.0)
-    builder (2.1.2)
-    i18n (0.4.2)
+    activemodel (3.2.0)
+      activesupport (= 3.2.0)
+      builder (~> 3.0.0)
+    activesupport (3.2.0)
+      i18n (~> 0.6)
+      multi_json (~> 1.0)
+    builder (3.0.0)
+    i18n (0.6.0)
     minitest (2.2.2)
+    multi_json (1.0.4)
     rake (0.9.2)
     tzinfo (0.3.23)
 
@@ -23,7 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (>= 3.0.0, < 3.2.0)
+  activesupport (>= 3.0.0, < 4.0)
   date_validator!
   minitest
   rake
