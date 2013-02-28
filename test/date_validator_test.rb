@@ -131,6 +131,22 @@ module ActiveModel
 
         TestRecord.new(Time.now).valid?.must_equal false
       end
+
+      describe "with type cast attributes" do
+        before do
+          TestRecord.send(:define_method, :expiration_date_before_type_cast, lambda { 'last year' })
+        end
+
+        it "should detect invalid date expressions when nil is allowed" do
+          TestRecord.validates(:expiration_date, :date => true, :allow_nil => true)
+          TestRecord.new(nil).valid?.must_equal false
+        end
+
+        it "should detect invalid date expressions when blank is allowed" do
+          TestRecord.validates(:expiration_date, :date => true, :allow_blank => true)
+          TestRecord.new(nil).valid?.must_equal false
+        end
+      end
     end
 
   end

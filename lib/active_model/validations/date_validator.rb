@@ -33,10 +33,33 @@ module ActiveModel
         end
       end
 
+      # Overridden because standard allow_nil and allow_blank checks don't work with
+      # string expressions that cannot be type cast to dates. We have to validate
+      # the pre-type cast values.
+      def validate(record)
+        attributes.each do |attribute|
+          value = record.read_attribute_for_validation(attribute)
+          validate_each(record, attribute, value)
+        end
+      end
+
       # The actual validator method. It is called when ActiveRecord iterates
       # over all the validators.
       def validate_each(record, attr_name, value)
-        return if options[:allow_nil] && value.nil?
+        before_type_cast = :"#{attr_name}_before_type_cast"
+
+        value_before_type_cast = if record.respond_to?(before_type_cast)
+          record.send(before_type_cast)
+        else
+          nil
+        end
+
+        if value_before_type_cast.present? && value.nil?
+          record.errors.add(attr_name, :not_a_date, options)
+          return
+        end
+
+        return if (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
 
         unless value
           record.errors.add(attr_name, :not_a_date, options)
