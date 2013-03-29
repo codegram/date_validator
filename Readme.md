@@ -1,10 +1,10 @@
-# date_validator
+# date_validator [![Build Status](https://travis-ci.org/codegram/date_validator.png?branch=master)](https://travis-ci.org/codegram/date_validator)
 
-A simple date validator for Rails 3. Compatible with Ruby 1.8.7, 1.9.2 and
-Rubinius 1.2.2.
+
+A simple date validator for Rails 3. Should be compatible with all latest Rubies.
+
 
 ```shell
-$ gem sources -a http://gemcutter.org/
 $ gem install date_validator
 ```
 
@@ -56,4 +56,4 @@ validates :start_date, :date => {:before => :end_date }
 
 ## Copyright
 
-Copyright (c) 2011 Codegram. See LICENSE for details.
+Copyright (c) 2013 Codegram. See LICENSE for details.
