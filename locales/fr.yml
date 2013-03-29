@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ca:
+  errors:
+    messages:
+      not_a_date: "n'est pas une date"
+      after: "doit être après %{date}"
+      after_or_equal_to: "doit être supérieur ou égal à %{date}"
+      before: "doit être avant %{date}"
+      before_or_equal_to: "doit être inférieur ou égal à %{date}"
