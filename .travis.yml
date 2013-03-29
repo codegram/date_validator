@@ -1,8 +1,8 @@
 # http://about.travis-ci.org/docs/user/build-configuration/
+langauge: ruby
 rvm:
-  - 1.8.7
   - 1.9.2
-  - ree
-  - ruby-head
-  - rbx
-  - rbx-2.0
+  - 1.9.3
+  - 2.0.0
+  - rbx-19mode
+  - jruby-19mode
