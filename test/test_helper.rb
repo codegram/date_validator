@@ -16,6 +16,8 @@ require 'active_support/time' # For testing Date and TimeWithZone objects
 require 'active_model'
 require 'date_validator'
 
+I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__), '../locales', '*.yml')).to_s]
+
 class TestRecord
   include ActiveModel::Validations
   attr_accessor :expiration_date
