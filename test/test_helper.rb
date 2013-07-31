@@ -11,6 +11,7 @@ begin; require 'turn'; rescue LoadError; end
 require 'minitest/spec'
 require 'minitest/autorun'
 
+require 'active_support/core_ext'
 require 'active_support/time' # For testing Date and TimeWithZone objects
 
 require 'active_model'
