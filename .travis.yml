@@ -4,7 +4,6 @@ env:
   - ACTIVE_MODEL_VERSION=3.2
   - ACTIVE_MODEL_VERSION=4.0
 rvm:
-  - 1.9.2
   - 1.9.3
   - 2.0.0
   - rbx-19mode
