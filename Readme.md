@@ -33,7 +33,7 @@ If you want to specify a custom message, you can do so in the options hash:
 
 ```ruby
 validates :start_date,
-  :date => {:after => Date.today, :message => 'must be after today'},
+  :date => {:after => Proc.new { Date.today }, :message => 'must be after today'},
   :on => :create
 ```
 
