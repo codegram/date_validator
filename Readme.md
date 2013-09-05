@@ -11,6 +11,12 @@ $ gem install date_validator
 And I mean simple. In your model:
 
 ```ruby
+validates :expiration_date, :date => true
+```
+
+or with some options, such as:
+
+```ruby
 validates :expiration_date,
           :date => {:after => Proc.new { Time.now },
                     :before => Proc.new { Time.now + 1.year } }
