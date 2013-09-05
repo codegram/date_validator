@@ -1,0 +1,8 @@
+it:
+  errors:
+    messages:
+      not_a_date: "non è una data"
+      after: "deve essere successiva a %{date}"
+      after_or_equal_to: "deve essere successiva o uguale a %{date}"
+      before: "deve essere antecedente a %{date}"
+      before_or_equal_to: "deve essere antecedente o uguale a %{date}"
