@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "date_validator"
 
-  s.add_runtime_dependency 'activemodel', '>= 3'
+  s.add_runtime_dependency 'activemodel'
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'rake'
