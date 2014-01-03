@@ -7,7 +7,7 @@ active_model_version = ENV['ACTIVE_MODEL_VERSION'] || 'default'
 active_model_opts =
   case active_model_version
   when 'master'
-    {github: 'rails/rails'}
+    { github: 'rails/rails' }
   when 'default'
     '~> 3'
   else

@@ -41,8 +41,8 @@ begin
     repo.branch("#{source_branch}").checkout
   end
 
-  task :doc => [:docs]
+  task doc: [:docs]
 rescue LoadError
 end
 
-task :default => :test
+task default: :test

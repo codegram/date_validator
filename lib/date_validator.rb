@@ -5,8 +5,8 @@ require 'active_support/i18n'
 #
 # @example
 #    validates :expiration_date,
-#              :date => {:after => Proc.new { Time.now },
-#                        :before => Proc.new { Time.now + 1.year } }
+#              date: { after: Proc.new { Time.now },
+#                      before: Proc.new { Time.now + 1.year } }
 #    # Using Proc.new prevents production cache issues
 #
 module DateValidator
