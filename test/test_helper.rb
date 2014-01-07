@@ -1,5 +1,5 @@
 begin
-  require 'simplecov'; 
+  require 'simplecov'
   SimpleCov.start do
     add_group "Lib", 'lib'
   end
@@ -8,7 +8,7 @@ end
 
 begin; require 'turn'; rescue LoadError; end
 
-require 'minitest/spec'
+gem 'minitest'
 require 'minitest/autorun'
 
 require 'active_support/core_ext'
