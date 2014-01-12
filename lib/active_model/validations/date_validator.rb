@@ -13,13 +13,13 @@ module ActiveModel
     class DateValidator < ActiveModel::EachValidator
 
       # Implemented checks and their associated operators.
-      CHECKS = { :after => :>, :after_or_equal_to => :>=,
-                :before => :<, :before_or_equal_to => :<=}.freeze
+      CHECKS = { after: :>,  after_or_equal_to: :>=,
+                before: :<, before_or_equal_to: :<= }.freeze
 
       # Call `#initialize` on the superclass, adding a default
-      # `:allow_nil => false` option.
+      # `allow_nil: false` option.
       def initialize(options)
-        super(options.reverse_merge(:allow_nil => false))
+        super(options.reverse_merge(allow_nil: false))
       end
 
       # Validates the arguments passed to the validator.
@@ -65,29 +65,29 @@ module ActiveModel
           record.errors.add(attr_name, :not_a_date, options)
           return
         end
-  
+
         options.slice(*CHECKS.keys).each do |option, option_value|
           option_value = option_value.call(record) if option_value.is_a?(Proc)
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
-       
+
           original_value = value
           original_option_value = option_value
 
           # To enable to_i conversion, these types must be converted to Datetimes
           if defined?(ActiveSupport::TimeWithZone)
-            option_value = option_value.to_datetime if option_value.is_a?(ActiveSupport::TimeWithZone) 
-            value = value.to_datetime if value.is_a?(ActiveSupport::TimeWithZone)  
+            option_value = option_value.to_datetime if option_value.is_a?(ActiveSupport::TimeWithZone)
+            value = value.to_datetime if value.is_a?(ActiveSupport::TimeWithZone)
           end
 
           if defined?(Date)
-            option_value = option_value.to_datetime if option_value.is_a?(Date) 
-            value = value.to_datetime if value.is_a?(Date)  
+            option_value = option_value.to_datetime if option_value.is_a?(Date)
+            value = value.to_datetime if value.is_a?(Date)
           end
-         
+
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
             record.errors.add(attr_name, option, options.merge(
-                :value => original_value,
-                :date  => (I18n.localize(original_option_value) rescue original_option_value)
+                value: original_value,
+                date:  (I18n.localize(original_option_value) rescue original_option_value)
             ))
           end
         end
@@ -104,8 +104,8 @@ module ActiveModel
       # Validates whether the value of the specified attribute is a validate Date
       #
       #   class Person < ActiveRecord::Base
-      #     validates_date_of :payment_date, :after => :packaging_date
-      #     validates_date_of :expiration_date, :before => Proc.new { Time.now }
+      #     validates_date_of :payment_date, after: :packaging_date
+      #     validates_date_of :expiration_date, before: Proc.new { Time.now }
       #   end
       #
       # Configuration options:

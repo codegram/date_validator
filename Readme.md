@@ -11,15 +11,15 @@ $ gem install date_validator
 And I mean simple. In your model:
 
 ```ruby
-validates :expiration_date, :date => true
+validates :expiration_date, date: true
 ```
 
 or with some options, such as:
 
 ```ruby
 validates :expiration_date,
-          :date => {:after => Proc.new { Time.now },
-                    :before => Proc.new { Time.now + 1.year } }
+          date: { after: Proc.new { Time.now },
+                  before: Proc.new { Time.now + 1.year } }
 # Using Proc.new prevents production cache issues
 ```
 
@@ -29,7 +29,7 @@ a Symbol instead of a block:
 ```ruby
 # Ensure the expiration date is after the packaging date
 validates :expiration_date,
-          :date => {:after => :packaging_date}
+          date: { after: :packaging_date }
 ```
 
 For now the available options you can use are `:after`, `:before`,
@@ -39,20 +39,20 @@ If you want to specify a custom message, you can do so in the options hash:
 
 ```ruby
 validates :start_date,
-  :date => {:after => Proc.new { Date.today }, :message => 'must be after today'},
-  :on => :create
+  date: { after: Proc.new { Date.today }, message: 'must be after today' },
+  on: :create
 ```
 
-Pretty much self-explanatory! :) 
+Pretty much self-explanatory! :)
 
 If you want to make sure an attribute is before/after another attribute, use:
 
 ```ruby
-validates :start_date, :date => {:before => :end_date }
+validates :start_date, date: { before: :end_date }
 ```
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
