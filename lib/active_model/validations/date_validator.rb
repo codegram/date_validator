@@ -14,7 +14,9 @@ module ActiveModel
 
       # Implemented checks and their associated operators.
       CHECKS = { after: :>,  after_or_equal_to: :>=,
-                before: :<, before_or_equal_to: :<= }.freeze
+                before: :<, before_or_equal_to: :<=,
+                equal_to: :==
+      }.freeze
 
       # Call `#initialize` on the superclass, adding a default
       # `allow_nil: false` option.
@@ -113,6 +115,7 @@ module ActiveModel
       # * <tt>:before</tt> - check that a Date is before the specified one.
       # * <tt>:after_or_equal_to</tt> - check that a Date is after or equal to the specified one.
       # * <tt>:before_or_equal_to</tt> - check that a Date is before or equal to the specified one.
+      # * <tt>:equal_to</tt> - check that a Date is equal to the specified one.
       def validates_date_of(*attr_names)
         validates_with DateValidator, _merge_attributes(attr_names)
       end

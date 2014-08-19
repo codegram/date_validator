@@ -6,3 +6,4 @@ en:
       after_or_equal_to: "must be after or equal to %{date}"
       before: "must be before %{date}"
       before_or_equal_to: "must be before or equal to %{date}"
+      equal_to: "must be equal to %{date}"
