@@ -1,7 +1,7 @@
 # date_validator [![Build Status](https://travis-ci.org/codegram/date_validator.png?branch=master)](https://travis-ci.org/codegram/date_validator)
 
 
-A simple date validator for Rails 3. Should be compatible with all latest Rubies.
+A simple date validator for Rails. Should be compatible with all latest Rubies.
 
 
 ```shell
