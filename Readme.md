@@ -33,7 +33,7 @@ validates :expiration_date,
 ```
 
 For now the available options you can use are `:after`, `:before`,
-`:after_or_equal_to` and `:before_or_equal_to`.
+`:after_or_equal_to`, `:before_or_equal_to` and `:equal_to`.
 
 If you want to specify a custom message, you can do so in the options hash:
 

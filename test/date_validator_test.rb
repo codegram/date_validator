@@ -38,7 +38,7 @@ module ActiveModel
         _context = must_be == :valid ? 'when value validates correctly' : 'when value does not match validation requirements'
 
         describe _context do
-          [:after, :before, :after_or_equal_to, :before_or_equal_to].each do |check|
+          [:after, :before, :after_or_equal_to, :before_or_equal_to, :equal_to].each do |check|
               now = Time.now.to_datetime
 
               model_date = case check
@@ -46,6 +46,7 @@ module ActiveModel
                 when :before             then must_be == :valid ? now - 21000 : now + 1
                 when :after_or_equal_to  then must_be == :valid ? now : now - 21000
                 when :before_or_equal_to then must_be == :valid ? now : now + 21000
+                when :equal_to           then must_be == :valid ? now : now + 21000
               end
 
               it "ensures that an attribute is #{must_be} when #{must_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
