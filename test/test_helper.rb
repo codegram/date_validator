@@ -11,6 +11,7 @@ begin; require 'turn'; rescue LoadError; end
 gem 'minitest'
 require 'minitest/autorun'
 
+require 'active_support'
 require 'active_support/core_ext'
 require 'active_support/time' # For testing Date and TimeWithZone objects
 
