@@ -89,7 +89,7 @@ module ActiveModel
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
             record.errors.add(attr_name, option, options.merge(
                 value: original_value,
-                date:  (I18n.localize(original_option_value) rescue original_option_value)
+                date:  (I18n.localize(original_option_value, format: format_option(option_value)) rescue original_option_value)
             ))
           end
         end
@@ -99,6 +99,11 @@ module ActiveModel
 
       def is_time?(object)
         object.is_a?(Time) || (defined?(Date) and object.is_a?(Date)) || (defined?(ActiveSupport::TimeWithZone) and object.is_a?(ActiveSupport::TimeWithZone))
+      end
+
+      def format_option(option_value)
+        format = I18n.t("formats.date_validator.#{option_value.class.name.underscore}", default: 'missing')
+        return format=='missing' ? :default : format
       end
     end
 
