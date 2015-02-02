@@ -6,3 +6,4 @@ it:
       after_or_equal_to: "deve essere successiva o uguale a %{date}"
       before: "deve essere antecedente a %{date}"
       before_or_equal_to: "deve essere antecedente o uguale a %{date}"
+      equal_to: "deve essere uguale a %{date}"
