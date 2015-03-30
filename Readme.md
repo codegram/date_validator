@@ -51,6 +51,11 @@ If you want to make sure an attribute is before/after another attribute, use:
 validates :start_date, date: { before: :end_date }
 ```
 
+If you want to allow an empty date, use:
+
+```ruby
+validates :optional_date, date: { allow_blank: true }
+```
 ## Note on Patches/Pull Requests
 
 * Fork the project.
