@@ -113,7 +113,7 @@ module ActiveModel
               TestRecord.validates(:expiration_date, date: { after: Time.now.to_date }).must_be_kind_of Hash
             when :time_with_zone then
               Time.zone = "Hawaii"
-              TestRecord.validates(:expiration_date, date: { before: Time.zone.parse((Time.now + 21000).to_s) }).must_be_kind_of Hash
+              TestRecord.validates(:expiration_date, date: { before: Time.zone.parse((Time.now + 21000).to_s, Time.now) }).must_be_kind_of Hash
           end
         end
       end
