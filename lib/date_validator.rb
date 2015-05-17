@@ -1,5 +1,6 @@
 require 'active_model/validations/date_validator'
 require 'active_support/i18n'
+require 'date_validator/engine' if defined?(Rails)
 
 # A simple date validator for Rails 3.
 #
