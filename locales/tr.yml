@@ -1,0 +1,9 @@
+tr:
+  errors:
+    messages:
+      not_a_date: "geçerli tarih değil"
+      after: "%{date} den ileri bir tarih olmalı"
+      after_or_equal_to: "%{date} ile aynı veya ileri bir tarih olmalı"
+      before: "%{date} den öncesi bir tarih olmalı"
+      before_or_equal_to: "%{date} ile aynı veya öncesi bir tarih olmalı"
+      equal_to: "%{date} ile aynı tarihte olmalı"
