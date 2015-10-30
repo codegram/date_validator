@@ -32,6 +32,14 @@ validates :expiration_date,
           date: { after: :packaging_date }
 ```
 
+or access attributes via the object being validated directly (the input to the Proc):
+
+```ruby
+validates :due_date,
+          date: { after_or_equal_to: Proc.new { |obj| obj.created_at.to_date }
+# The object being validated is available in the Proc
+```
+
 For now the available options you can use are `:after`, `:before`,
 `:after_or_equal_to`, `:before_or_equal_to` and `:equal_to`.
 
