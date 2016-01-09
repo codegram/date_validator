@@ -148,6 +148,13 @@ module ActiveModel
           TestRecord.new(nil).valid?.must_equal false
         end
       end
+
+      describe 'with garbage input' do
+        it 'is invalid' do
+          TestRecord.validates(:expiration_date, date: true, allow_nil: true)
+          TestRecord.new('not a date').valid?.must_equal false
+        end
+      end
     end
 
   end
