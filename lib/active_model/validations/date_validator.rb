@@ -68,6 +68,11 @@ module ActiveModel
           return
         end
 
+        unless is_time?(value)
+          record.errors.add(attr_name, :not_a_date, options)
+          return
+        end
+
         options.slice(*CHECKS.keys).each do |option, option_value|
           option_value = option_value.call(record) if option_value.is_a?(Proc)
           option_value = record.send(option_value) if option_value.is_a?(Symbol)
