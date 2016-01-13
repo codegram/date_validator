@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "date_validator"
 
   s.add_runtime_dependency 'activemodel'
+  s.add_runtime_dependency 'activesupport'
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'activesupport'
   s.add_development_dependency 'tzinfo'
 
   s.files         = `git ls-files`.split("\n")

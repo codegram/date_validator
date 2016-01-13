@@ -11,7 +11,6 @@ begin; require 'turn'; rescue LoadError; end
 gem 'minitest'
 require 'minitest/autorun'
 
-require 'active_support/all'
 require 'active_model'
 require 'date_validator'
 

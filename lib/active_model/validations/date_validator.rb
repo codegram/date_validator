@@ -1,4 +1,6 @@
 require 'active_model/validations'
+require 'active_support/core_ext/date_time/conversions'
+require 'active_support/core_ext/hash/conversions'
 
 # ActiveModel Rails module.
 module ActiveModel
