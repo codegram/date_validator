@@ -1,5 +1,5 @@
 # http://about.travis-ci.org/docs/user/build-configuration/
-langauge: ruby
+language: ruby
 before_install:
   - gem update bundler
 env:
