@@ -155,6 +155,14 @@ module ActiveModel
           TestRecord.new('not a date').valid?.must_equal false
         end
       end
+
+      describe "with other validators" do
+        it "does not interfere with numericality equals" do
+          TestRecord.validates_numericality_of :expiration_date, equal_to: 0
+          TestRecord.new(0).valid?.must_equal true
+          TestRecord.new(1).valid?.must_equal false
+        end
+      end
     end
 
   end
