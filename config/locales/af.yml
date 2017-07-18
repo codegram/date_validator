@@ -4,9 +4,9 @@ af:
   errors:
     messages:
       not_a_date: "is nie 'n datum nie"
-      after: "moet na %{date} wees"
-      after_or_equal_to: "moet na of op %{date} wees"
-      before: "moet voor %{date} wees"
-      before_or_equal_to: "moet voor of op %{date} wees"
-      equal_to: "moet gelyk aan %{date} wees"
+      date_after: "moet na %{date} wees"
+      date_after_or_equal_to: "moet na of op %{date} wees"
+      date_before: "moet voor %{date} wees"
+      date_before_or_equal_to: "moet voor of op %{date} wees"
+      date_equal_to: "moet gelyk aan %{date} wees"
       cannot_be_in_the_future: "kan nie in die toekoms wees nie"
