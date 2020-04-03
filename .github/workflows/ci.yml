@@ -1,0 +1,34 @@
+name: "Tests"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+env:
+  CI: "true"
+
+jobs:
+  main:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.2, 2.3, 2.4, 2.5, 2.6, 2.7]
+        activemodel: [3.2, 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0]
+      fail-fast: true
+    env:
+      ACTIVE_MODEL_VERSION: ${{ matrix.activemodel }}
+    steps:
+      - uses: actions/checkout@v2.0.0
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@master
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - run: bundle install --path vendor/bundle --jobs 4 --retry 3
+        name: Install Ruby deps
+      - run: bundle exec rake
