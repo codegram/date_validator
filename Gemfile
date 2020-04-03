@@ -1,17 +1,12 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gemspec
 
-active_model_version = ENV['ACTIVE_MODEL_VERSION'] || 'default'
-
 active_model_opts =
-  case active_model_version
-  when 'master'
-    { github: 'rails/rails' }
-  when 'default'
-    '~> 3'
-  else
-    "~> #{active_model_version}"
+  case ENV['ACTIVE_MODEL_VERSION']
+  when 'master' then { github: 'rails/rails' }
+  when 'default' then '~> 3'
+  else "~> #{ENV['ACTIVE_MODEL_VERSION']}"
   end
 
 gem 'activemodel', active_model_opts

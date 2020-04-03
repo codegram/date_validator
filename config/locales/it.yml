@@ -2,8 +2,8 @@ it:
   errors:
     messages:
       not_a_date: "non è una data"
-      after: "deve essere successiva a %{date}"
-      after_or_equal_to: "deve essere successiva o uguale a %{date}"
-      before: "deve essere antecedente a %{date}"
-      before_or_equal_to: "deve essere antecedente o uguale a %{date}"
-      equal_to: "deve essere uguale a %{date}"
+      date_after: "deve essere successiva a %{date}"
+      date_after_or_equal_to: "deve essere successiva o uguale a %{date}"
+      date_before: "deve essere antecedente a %{date}"
+      date_before_or_equal_to: "deve essere antecedente o uguale a %{date}"
+      date_equal_to: "deve essere uguale a %{date}"
