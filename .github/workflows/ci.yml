@@ -19,6 +19,13 @@ jobs:
       matrix:
         ruby: [2.2, 2.3, 2.4, 2.5, 2.6, 2.7]
         activemodel: [3.2, 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0]
+        exclude:
+          - ruby: 2.2
+            activemodel: 6.0
+          - ruby: 2.3
+            activemodel: 6.0
+          - ruby: 2.4
+            activemodel: 6.0
       fail-fast: true
     env:
       ACTIVE_MODEL_VERSION: ${{ matrix.activemodel }}
@@ -29,6 +36,6 @@ jobs:
       - uses: ruby/setup-ruby@master
         with:
           ruby-version: ${{ matrix.ruby }}
-      - run: bundle install --path vendor/bundle --jobs 4 --retry 3
+      - run: bundle install --jobs 4 --retry 3
         name: Install Ruby deps
       - run: bundle exec rake
