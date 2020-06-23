@@ -1,7 +1,7 @@
 zh-CN:
   errors:
     messages:
-      date_not_a_date: "不是一个日期"
+      not_a_date: "不是一个日期"
       date_after: "必须晚于 %{date}"
       date_after_or_equal_to: "必须早于或等于 %{date}"
       date_before: "必须早于 %{date}"
