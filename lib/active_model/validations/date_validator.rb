@@ -59,19 +59,19 @@ module ActiveModel
         end
 
         if value_before_type_cast.present? && value.nil?
-          record.errors.add(attr_name, :not_a_date, options)
+          record.errors.add(attr_name, :not_a_date, **options)
           return
         end
 
         return if (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
 
         unless value
-          record.errors.add(attr_name, :not_a_date, options)
+          record.errors.add(attr_name, :not_a_date, **options)
           return
         end
 
         unless is_time?(value)
-          record.errors.add(attr_name, :not_a_date, options)
+          record.errors.add(attr_name, :not_a_date, **options)
           return
         end
 
@@ -94,7 +94,7 @@ module ActiveModel
           end
 
           unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
-            record.errors.add(attr_name, :"date_#{option}", options.merge(
+            record.errors.add(attr_name, :"date_#{option}", **options.merge(
                 value: original_value,
                 date:  (I18n.localize(original_option_value) rescue original_option_value)
             ))
