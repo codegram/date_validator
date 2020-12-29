@@ -10,7 +10,3 @@ active_model_opts =
   end
 
 gem 'activemodel', active_model_opts
-
-platforms :rbx do
-  gem 'rubysl', '~> 2.0'
-end
