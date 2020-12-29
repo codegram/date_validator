@@ -19,6 +19,11 @@ jobs:
       matrix:
         ruby: [2.2, 2.3, 2.4, 2.5, 2.6, 2.7]
         activemodel: [3.2, 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0, 6.1]
+        include:
+          - ruby: 3.0
+            activemodel: 6.0
+          - ruby: 3.0
+            activemodel: 6.1
         exclude:
           - ruby: 2.2
             activemodel: 6.0
