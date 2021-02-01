@@ -12,6 +12,7 @@ gem 'minitest'
 require 'minitest/autorun'
 
 require 'active_model'
+require 'active_support/core_ext/time/zones'
 require 'date_validator'
 
 I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__), '../config/locales', '*.yml')).to_s]

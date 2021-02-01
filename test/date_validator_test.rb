@@ -84,6 +84,8 @@ module ActiveModel
 
             it "allows custom validation message to be handled by I18n" do
               custom_message = 'Custom Date Message'
+
+              I18n.backend.eager_load! if I18n.backend.respond_to?(:eager_load!)
               I18n.backend.store_translations('en', { errors: { messages: { not_a_date: custom_message }}})
 
               TestRecord.validates :expiration_date, date: true
