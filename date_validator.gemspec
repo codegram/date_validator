@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Oriol Gual", "Josep M. Bach", "Josep Jaume Rey"]
   s.email       = ["info@codegram.com"]
   s.homepage    = "http://github.com/codegram/date_validator"
+  s.license     = "MIT"
   s.summary     = %q{A simple, ORM agnostic, Ruby 1.9 compatible date validator for Rails 3+, based on ActiveModel.}
   s.description = %q{A simple, ORM agnostic, Ruby 1.9 compatible date validator for Rails 3+, based on ActiveModel. Currently supporting :after, :before, :after_or_equal_to and :before_or_equal_to options.}
 
