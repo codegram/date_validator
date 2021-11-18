@@ -5,7 +5,7 @@ fr:
   errors:
     messages:
       not_a_date: "n'est pas une date"
-      date_after: "doit être après %{date}"
-      date_after_or_equal_to: "doit être supérieur ou égal à %{date}"
-      date_before: "doit être avant %{date}"
-      date_before_or_equal_to: "doit être inférieur ou égal à %{date}"
+      date_after: "doit être après le %{date}"
+      date_after_or_equal_to: "doit être supérieur(e) ou égal(e) à %{date}"
+      date_before: "doit être avant le %{date}"
+      date_before_or_equal_to: "doit être inférieur(e) ou égal(e) à %{date}"
