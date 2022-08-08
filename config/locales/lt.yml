@@ -1,0 +1,9 @@
+lt:
+  errors:
+    messages:
+      not_a_date: "nėra data"
+      date_after: "turi būti vėlesnė nei %{date}"
+      date_after_or_equal_to: "turi būti vėlesnė arba lygi %{date}"
+      date_before: "turi būti ankstenė nei %{date}"
+      date_before_or_equal_to: "turi būti ankstesnė arba lygi %{date}"
+      date_equal_to: "turi būti lygi %{date}"
