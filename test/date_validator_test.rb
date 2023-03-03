@@ -39,14 +39,14 @@ module ActiveModel
 
         describe _context do
           [:after, :before, :after_or_equal_to, :before_or_equal_to, :equal_to].each do |check|
-              now = Time.now.to_datetime
+              now = Time.now.to_datetime.change(usec: 0)
 
               model_date = case check
                 when :after              then must_be == :valid ? now + 21000 : now - 1
                 when :before             then must_be == :valid ? now - 21000 : now + 1
                 when :after_or_equal_to  then must_be == :valid ? now : now - 21000
                 when :before_or_equal_to then must_be == :valid ? now : now + 21000
-                when :equal_to           then must_be == :valid ? now : now + 21000
+                when :equal_to           then must_be == :valid ? now : now.change(usec: 1)
               end
 
               it "ensures that an attribute is #{must_be} when #{must_be == :valid ? 'respecting' : 'offending' } the #{check} check" do
