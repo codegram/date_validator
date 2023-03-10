@@ -93,7 +93,7 @@ module ActiveModel
             value = value.to_datetime if value.is_a?(Date)
           end
 
-          unless is_time?(option_value) && value.to_i.send(CHECKS[option], option_value.to_i)
+          unless is_time?(option_value) && value.send(CHECKS[option], option_value)
             record.errors.add(attr_name, :"date_#{option}", **options.merge(
                 value: original_value,
                 date:  (I18n.localize(original_option_value) rescue original_option_value)
